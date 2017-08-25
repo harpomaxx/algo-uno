@@ -41,7 +41,7 @@ class array:
         def __setitem__(self,index,value):
                 if index > self.size:
                         print ("IndexError: index Out of bounds")
-                elif type(value) != self.type:
+                elif type(value) != self.type and value!=None:
                         print ("TypeError: value error")
                 else:
                         self.data[index]=value
