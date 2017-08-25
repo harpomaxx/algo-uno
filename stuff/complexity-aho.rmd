@@ -1,0 +1,96 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+when we say the running time T(n) of some program is $O(n^2)$, read "big oh of n squared" or just "oh of n squared," we mean that there are positive constants c and n0 such that for n equal to or greater than n0, we have T(n) ≤ $cn^2$. The value of n0 shown is the minimum possible value; any greater value would also work. 
+
+
+
+Another reason for at least considering programs whose growth rates are as low as possible is that the growth rate ultimately determines how big a problem we can solve on a computer. Put another way, as computers get faster, our desire to solve larger problems on them continues to increase. 
+
+Suppose we can afford 1000 seconds, or about 17 minutes, to solve a given problem. How large a problem can we solve? 
+
+
+```{r}
+x<-data.frame(value=seq(0,200))
+ggplot(x)+
+  geom_line(aes(x=value,y=2^x),color='red')+
+  geom_line(aes(x=value,y=(x^3)/2),color='blue')+
+ # geom_line(aes(x=value,y=5*x^2),color='green')+
+  # geom_line(aes(x=value,y=100*x),color='black')+
+  geom_vline(aes(xintercept=7))+
+  ylab("t(n)")+xlab("n")+ylim(0,3000)+xlim(0,15)+
+  theme_minimal()
+```
+Suppose that we now buy a machine that runs ten times faster at no additional cost. Then for the same cost we can spend $10^4$ seconds on a problem where we spent $10^3$ seconds before. 
+
+```{r}
+x<-data.frame(value=seq(0,200))
+ggplot(x)+
+  geom_line(aes(x=value,y=2^x),color='red')+
+  geom_line(aes(x=value,y=(x^3)/2),color='blue')+
+  geom_line(aes(x=value,y=5*x^2),color='green')+
+   geom_line(aes(x=value,y=100*x),color='black')+
+  geom_hline(aes(yintercept=10000))+
+  ylab("t(n)")+xlab("n")+ylim(0,10000)+xlim(0,100)+
+  theme_minimal()
+```
+
+
+```{python bubble}
+def bubbleSort(alist):
+    for passnum in range(len(alist)-1,0,-1):
+        for i in range(passnum):
+            if alist[i]>alist[i+1]:
+                temp = alist[i]
+                alist[i] = alist[i+1]
+                alist[i+1] = temp
+
+alist = [54,26,93,17,77,31,44,55,20]
+bubbleSort(alist)
+print alist
+```
+
+```{python}
+import time
+def sumOfN(n):
+   theSum = 0
+   start = time.time()
+
+   for i in range(1,n+1):
+       theSum = theSum + i
+   end = time.time()   
+   return theSum
+   
+def sumOfN2(n):
+ start = time.time()
+ res=(n*(n+1))/2
+ end = time.time() 
+ return(end-start)
+
+   
+for n in range(0,8):
+    print(n,sumOfN2(10**n))
+```
+```{r}
+library(readr)
+library(ggplot2)
+exp_complex<-read_delim(file="data/exp_complexity.csv",delim=" ",col_names = FALSE)
+
+names(exp_complex)<-c('N','sumOfN','sumOfN2')
+gridExtra::grid.table(exp_complex)
+
+ggplot(exp_complex[1:7,])+
+  geom_line(aes(x=N,y=sumOfN*1000),color='red',size=1)+
+  geom_point(aes(x=N,y=sumOfN*1000),color='red')+
+  geom_line(aes(x=N,y=sumOfN2*1000),color='blue',,size=1)+
+  geom_point(aes(x=N,y=sumOfN2*1000),color='blue')+
+  xlab("Tamaño[n]")+ylab("Tiempo [ms]")+
+  theme_classic()+
+  scale_x_continuous(labels = 10**exp_complex[1:7,]$N,breaks=exp_complex[1:7,]$N)
+
+```
+
+
+

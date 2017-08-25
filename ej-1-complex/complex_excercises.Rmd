@@ -1,0 +1,89 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+### Ejercicio 3
+Calcular la complejidad temporal del algoritmo  para el siguiente algoritmo de forma experimental.  El cálculo se debe efectuar para los siguiente intervalos de la variable monto
+
+1. Calcular la complejidad para el intervalo (1,100) con paso 10
+2. Calcular la complejidad para el intervalo (100,1000) con paso 100
+3. Calcular la complejidad para el intervalo (1000,10000) con paso 1000
+4. Calcular la complejidad para el intervalo (10000,100000) con paso 10000
+5. Calcular la complejidad para el intervalo (100000,1000000) con paso 100000
+
+
+```{python}
+# Algoritmo inútil que resta billetes de 100,10 y 1 a un monto dado.
+def entrega_billetes_2(monto):
+        start=time.time()
+        billete=100
+        inc=0
+        billete_actual=billete/(10**inc)
+        while (monto>0):
+                if monto >= billete_actual:
+                        monto=monto-billete_actual
+                #       print ("1 billete de ",billete_actual)
+                else:
+                        inc=inc+1
+                        billete_actual=billete/(10**inc)
+        stop=time.time()
+        return(stop-start)
+
+
+
+import sys,time
+for monto in range(10,100,10):
+        print monto,entrega_billetes_2(monto)
+#
+for monto in range(100,1000,100):
+        print monto,entrega_billetes_2(monto)
+#
+for monto in range(1000,10000,1000):
+        print monto,entrega_billetes_2(monto)
+#
+for monto in range(10000,100000,10000):
+        print monto,entrega_billetes_2(monto)
+#
+for monto in range(100000,1000000,100000):
+        print monto,entrega_billetes_2(monto)
+
+```
+
+Proyectar los resultados obtenidos sobre un eje de coordenadas cartesianos donde el eje X representa la el tamaño de la entrada (n) y el eje Y el tiempo de ejecución para cada uno de los intervalos
+
+
+
+```{r, echo=FALSE, fig.height=12, fig.width=5}
+library(gridExtra)
+data<-read.csv("/home/harpo/data.csv",header = F,sep=' ')
+
+i1<-ggplot(data[1:10,])+
+  geom_line(aes(x=V1,y=V2*1000))+
+  ylab("time [ms]")+xlab("n")+ggtitle("intervalo (1,100) con paso 10")+
+  theme_bw()
+
+i2<-ggplot(data[11:20,])+
+  geom_line(aes(x=V1,y=V2*1000))+
+  ylab("time [ms]")+xlab("n")+ggtitle("intervalo (100,1000) con paso 100")+
+  theme_bw()
+
+i3<-ggplot(data[21:30,])+
+  geom_line(aes(x=V1,y=V2*1000))+
+  ylab("time [ms]")+xlab("n")+ggtitle("intervalo (1000,10000) con paso 1000")+
+  theme_bw()
+
+i4<-ggplot(data[31:40,])+
+  geom_line(aes(x=V1,y=V2*1000))+
+  ylab("time [ms]")+xlab("n")+ggtitle("intervalo (10000,100000) con paso 10000")+
+  theme_bw()
+
+i5<-ggplot(data[41:50,])+
+  geom_line(aes(x=V1,y=V2*1000))+
+  ylab("time [ms]")+xlab("n")+ggtitle("intervalo (100000,1000000) con paso 100000")+
+  theme_bw()
+
+grid.arrange(i1,i2,i3,i4,i5,ncol=1)
+```
+
