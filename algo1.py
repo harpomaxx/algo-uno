@@ -27,7 +27,6 @@ def input_str( str ):
 class array:
         data=[]
         def __init__(self,size=None,init_value=0):
-		print type(init_value)
                 if size == None:
                         self.size=0
                 else:
