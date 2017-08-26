@@ -1,4 +1,5 @@
-# Paquete algo1.py v3
+# Paquete algo1.py 
+# sáb ago 26 10:45:26 ART 2017
 # Algoritmos y Estructuaras de datos I
 # Funciones de carga de valores
 import copy
