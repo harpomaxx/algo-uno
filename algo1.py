@@ -1,5 +1,5 @@
 # Paquete algo1.py 
-# sáb ago 26 10:45:26 ART 2017
+# mie oct 11 12:38:35 ART 2017
 # Algoritmos y Estructuaras de datos I
 # Funciones de carga de valores
 import copy
@@ -25,14 +25,14 @@ def input_str( str ):
 	return ingreso
 
 # Clase arreglos
-class array:
+class Array:
         data=[]
         def __init__(self,size=None,init_value=0):
                 if size == None:
                         self.size=0
                 else:
                         self.size=size
-                self.data= [copy.deepcopy(init_value) for i in range(0,size)]
+                self.data= [copy.deepcopy(None) for i in range(0,size)]
                 self.type = type(init_value)
         def __getitem__(self,index):
                 if index > self.size:
