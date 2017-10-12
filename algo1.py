@@ -1,5 +1,5 @@
 # Paquete algo1.py 
-# mie oct 11 12:38:35 ART 2017
+# jue oct 12 13:26:46 ART 2017
 # Algoritmos y Estructuaras de datos I
 # Funciones de carga de valores
 import copy
@@ -32,7 +32,10 @@ class Array:
                         self.size=0
                 else:
                         self.size=size
-                self.data= [copy.deepcopy(None) for i in range(0,size)]
+                if type(init_value)!=Array:
+                    self.data= [copy.deepcopy(None) for i in range(0,size)]
+                else:
+                    self.data= [copy.deepcopy(init_value) for i in range(0,size)]
                 self.type = type(init_value)
         def __getitem__(self,index):
                 if index > self.size:
