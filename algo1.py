@@ -54,3 +54,35 @@ class Array:
 
         def __len__(self):
                 return(self.size)
+
+class String:
+        def __init__(self,string):
+            self.arr=Array(len(string),'c')
+            self.arr.data=string
+        
+        def __getitem__(self,index):
+            return self.arr[index]
+        
+        def __setitem__(self,index,value):
+            self.arr[index]=value
+       
+        def __str__(self):
+            return str(self.arr.data)
+
+        def __len__(self):
+            return len(self.arr)
+ 
+def substr(t,start,end):
+       return String(''.join([t[i] for i in range(start,end)] ))
+
+# O(t+1). Donde t es la cantidad de caracteres que matchearon y 1 es para el caso de t=0
+def strcmp(t,p):
+    for i in range(0,len(p)):
+         if t[i] != p[i]:
+            return False
+    return True
+
+def concat(s,c):
+    return String(s.arr.data+c)
+
+
