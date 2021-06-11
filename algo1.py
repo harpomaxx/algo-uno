@@ -1,6 +1,6 @@
 # Paquete algo1.py 
 # jue oct 12 13:26:46 ART 2017
-# Algoritmos y Estructuaras de datos I
+# Algoritmos y Estructuraras de datos I
 # Funciones de carga de valores
 import copy
 def input_int( str ):
@@ -77,10 +77,12 @@ def substr(t,start,end):
 
 # O(t+1). Donde t es la cantidad de caracteres que matchearon y 1 es para el caso de t=0
 def strcmp(t,p):
-    for i in range(0,len(p)):
-         if t[i] != p[i]:
-            return False
-    return True
+        if len(t) == len(p):
+            for i in range(0,len(p)):
+                if t[i] != p[i]:
+                    return False
+            return True
+        return False
 
 def concat(s,c):
        return String(s.arr.data+c.arr.data)
