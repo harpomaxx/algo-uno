@@ -32,10 +32,7 @@ class Array:
                         self.size=0
                 else:
                         self.size=size
-                if type(init_value)!=Array:
-                    self.data= [copy.deepcopy(None) for i in range(0,size)]
-                else:
-                    self.data= [copy.deepcopy(init_value) for i in range(0,size)]
+                self.data= [copy.deepcopy(init_value) for i in range(0,size)]
                 self.type = type(init_value)
         def __getitem__(self,index):
                 if index > self.size:
